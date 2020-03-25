@@ -110,7 +110,7 @@ print(requests.get("http://spell-buddy.herokuapp.com/api/spells?name=magic%20mis
 * We'll learn more about REST when we start building APIs later on in the course
 
 ##### Resources
-
+* [Requests Quickstart](https://requests.readthedocs.io/en/master/user/quickstart/#)
 * [Tutorial Point for HTTP Request](http://www.tutorialspoint.com/http/http_requests.htm)
 * [Andrew Havens Beginners Guide to Creating a REST API](http://www.andrewhavens.com/posts/20/beginners-guide-to-creating-a-rest-api/)
 * [Miguel Grinberg Design a RESTful API with Python and Flask](http://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask)
