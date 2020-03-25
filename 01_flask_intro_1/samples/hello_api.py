@@ -9,8 +9,7 @@ hellos = {
     'spanish': 'Hola mundo.',
     'french': 'Bonjour le monde.',
     'german': 'Hallo welt.',
-    'italian': 'Ciao mondo.',
-    'chinese' : '你好世界',
+    'italian': 'Ciao mondo.'
 }
 
 @app.route('/')
@@ -21,7 +20,7 @@ def hello_world():
     print(request.args)
     print(request.method)
     
-    response = hellos.get(language) or hellos['chinese']
+    response = hellos.get(language) or hellos['italian']
 
     return jsonify(name=response)
 
