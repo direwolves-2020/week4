@@ -2,9 +2,6 @@ from flask import Flask
 
 app = Flask(__name__)
 
-# @app.route('/hello-grandpa')
-
-# @app.route('/goodbye-grandpa')
 
 @app.route('/i-love-you-grandpa')
 def ily_grandpa():
