@@ -103,23 +103,19 @@ class PokeController:
         if user_action == '1':
             self.view.view_all_view(self.user.pokemon)
         elif user_action == '2':
-            # I need to view by species
-            self.view_by_species()
-        elif user_action == '3':
             self.view_by_habitat()
         #Send them back to poke_portal
         self.poke_portal()
 
-    def view_by_species(self):
-        species_of_interest = self.view.species_search_view(self.user.pokemon)
-        sql_pull = PokeDao.lookup_user_pokemon(self.user.pokemon[species_of_interest].species_id)
-        self.view.search_output(sql_pull)
-
-        self.poke_portal()
-
     def view_by_habitat(self):
         habitat_of_interest = self.view.habitat_search_view(self.user.pokemon)
-        sql_pull = PokeDao.lookup_user_pokemon(habitat_of_interest, self.user.id)
+        pokemon_names = PokeDao.lookup_by_habitat(habitat_of_interest, self.user.id)
+        if pokemon_names = []:
+            self.view.search_error_view()
+            
+        else:
+            self.view.search_output(pokemon_names)
+        
 
 
 

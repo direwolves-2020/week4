@@ -47,7 +47,7 @@ class PokeView:
         input('Pokemon not found. Press any key to return home.')
 
     def view_user_pokemon_view(self):
-        print('How would you like to view your pokemon?\n1. View all\n2. View by species\n3. View by habitat')
+        print('How would you like to view your pokemon?\n1. View all\n2. View by habitat')
         return input('>')
 
     def user_has_no_pokemon_view(self):
@@ -58,12 +58,6 @@ class PokeView:
         for x in pokemon_list:
             print(x)
 
-    def species_search_view(self, pokemon_list):
-        print('Which of the following species would you like to search by?')
-        for i,x in enumerate(pokemon_list):
-            print(i, x.name)
-        return input('>')
-
     def habitat_search_view(self, pokemon_list):
         habitats = []
         for x in pokemon_list:
@@ -72,7 +66,12 @@ class PokeView:
         print('The following habitats exist:, \n', habitats)
         print('Which of the above do you want to search by?(type the string)')
         return input ('>')
-    
 
-    # def search_output(self, search_result):
-    #     print(search_result)
+    def search_output(self, search_result):
+        print('We found:')
+        for pokemon in search_result:
+            print (pokemon[0])
+        input('Press any key to return to the portal.')
+
+    def search_error_view(self):
+        input('invalid search. Press any key to return to portal')

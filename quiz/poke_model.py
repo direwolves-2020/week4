@@ -226,27 +226,26 @@ class PokeDao:
     def lookup_by_habitat(habitat, user_id):
         c = conn.cursor()
         c.execute(f"""
-            SELECT pokemon.* from pokemon, pokemon_species  WHERE
-            pokemon_species.habitat = '{habitat}'
-            AND user_pokemon_relation.id = {user_id};
+            Select pokemon.name
+            From pokemon
+            INNER JOIN pokemon_species ON pokemon_species.id = pokemon.species_id
+            INNER JOIN user_pokemon_link ON user_pokemon_link.pokemon_id = pokemon.id
+            WHERE pokemon_species.habitat = '{habitat}' AND user_pokemon_link.user_id = {user_id};
             """)
+        list_of_names = c.fetchall()
+        return list_of_names
 
-            #lets say there are 5 pokemon in the same habitat
-            #if the environment changes from good to bad
-            #because theres no value you would update ... 
-            #unless the habitat table 
+    def test():
+        c = conn.cursor()
+        c.execute("""
+        Select pokemon.*, pokemon_species.habitat, pokemon_species.shape, pokemon_species.color
+        From pokemon, pokemon_species
+        INNER JOIN user_pokemon_link ON user_pokemon_link.pokemon_id = pokemon.id
+        INNER JOIN pokemon_species ON pokemon_species.id = pokemon.species_id
+        WHERE user_pokemon_link = 1 AND user_pokemon_link.pokemon_id = pokemon.id;
+        """)
+        list_of_pokemon = c.fetchall()
+        return list_of_pokemon
 
-        c.fetchall()
-        
 
-
-
-#Question for Nikhil:
-#In add_pokemon, my sql statement is broken into two parts... 
-# Why didnt this work? It returned all of the pokemon in my db
-# f"""SELECT user_pokemon_link.user_id, user_pokemon_link.pokemon_id
-#         FROM pokemon, user_pokemon_link 
-#         WHERE user_pokemon_link.user_id = 1 
-#         AND pokemon.id 
-#         (SELECT pokemon.id FROM pokemon WHERE pokemon.name = 'blastoise');
-#         """)
+PokeDao.test()
