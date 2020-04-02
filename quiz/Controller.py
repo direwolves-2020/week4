@@ -19,6 +19,7 @@ class Controller:
 
 
     def start(self):
+        self.seed_tables()
         self.check_user()
         self.view_home_screen()
 
@@ -148,13 +149,39 @@ class Controller:
         print(ModelDAO.get_all_users())
 
 
-    def get_pokemon_habitats(self):
-        print(*ModelDAO.get_habitat_table(), sep='\n')
-
-
     def get_pokemon_table(self):
-        print(*ModelDAO.get_pokemon_table(), sep='\n')
+        # print(*ModelDAO.get_pokemon_table(), sep='\n')
+        return ModelDAO.get_pokemon_table()
 
+
+    def get_species_table(self):
+        return ModelDAO.get_species_table()
+
+
+    def get_habitat_table(self):
+        return ModelDAO.get_habitat_table()
+        # print(*ModelDAO.get_habitat_table(), sep='\n')
+
+
+    def seed_tables(self):
+        pokes = PokeAPI.get_all_pokemon()
+        habitats = PokeAPI.get_all_habitats()
+        
+        res = self.get_pokemon_table()
+        res2 = self.get_pokemon_table()
+        res3 = self.get_pokemon_table()
+        
+        if len(res) == 0:
+            for i in pokes: 
+                ModelDAO.seed_pokemon(i)
+       
+        if len(res2) == 0:
+            for i in pokes: 
+                ModelDAO.seed_species(i)
+        
+        if len(res3) == 0:
+            for h in habitats: 
+                ModelDAO.seed_habitat(h)
 
 
 if __name__ == "__main__":

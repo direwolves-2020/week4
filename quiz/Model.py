@@ -206,7 +206,7 @@ class ModelDAO:
         conn = sqlite3.connect('pokemon_database.db')
         c = conn.cursor()
         
-        #c.execute(""" DELETE FROM pokemon """)
+        # c.execute(""" DELETE FROM pokemon """)
 
         result = c.execute(
             f""" INSERT INTO pokemon (pokemon_id, pokemon_name, species_name, habitat_name)
@@ -245,7 +245,7 @@ class ModelDAO:
             species.species_name = json_response['name']
 
             results = []
-            results.append(s)
+            results.append(species)
 
         #insert into db
         conn = sqlite3.connect('pokemon_database.db')
@@ -290,7 +290,7 @@ class ModelDAO:
             habitat.habitat_name = json_response['name']
 
             results = []
-            results.append(s)
+            results.append(habitat)
 
         #insert into db
         conn = sqlite3.connect('pokemon_database.db')
@@ -382,3 +382,16 @@ class PokeAPI:
         return p.pokemon_id
 
 
+# p = PokeAPI()
+# m = ModelDAO
+# pokes = p.get_all_pokemon()
+# habitats = p.get_all_habitats()
+
+# for i in pokes: 
+#     m.seed_pokemon(i)
+#     m.seed_species(i)
+
+# for h in habitats:
+#     m.seed_habitat(h)
+
+# print(m.get_pokemon_table())
